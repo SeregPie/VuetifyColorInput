@@ -10,7 +10,6 @@
 				hideDetails: false,
 				noAlpha: false,
 				persistentHint: false,
-				hint: 'The color should not be too light or too dark.',
 				value: chroma.random().hex(),
 			};
 		},
