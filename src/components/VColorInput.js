@@ -46,13 +46,6 @@ export default {
 		valueForColorPicker() {
 			return this.getValue('object.rgb', true);
 		},
-		aaaa() {
-			let {r, g, b} = this.valueForColorPicker;
-			r = 255 - r;
-			g = 255 - g;
-			b = 255 - b;
-			return `rgb(${r}, ${g}, ${b})`;
-		},
 	},
 	watch: {
 		internalValue(value) {
