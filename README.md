@@ -8,7 +8,7 @@ A color input component for Vuetify.
 
 ## dependencies
 
-- [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
+- [chroma.js](https://github.com/gka/chroma.js)
 
 ## setup
 
