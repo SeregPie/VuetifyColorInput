@@ -1,3 +1,6 @@
+import Color from '../utils/Color';
+import isDeepEqual from '../utils/isDeepEqual';
+
 export default {
 	name: 'VColorInput',
 	props: {
@@ -48,25 +51,17 @@ export default {
 		},
 	},
 	watch: {
-		internalValue(value) {
-			this.$emit('input', value);
+		internalValue: {
+			handler(value, oldValue) {
+				if (!isDeepEqual(value, oldValue)) {
+					this.$emit('input', value);
+				}
+			},
+			immediate: true,
 		},
 		value(value) {
 			this.lazyValue = value;
 		},
-	},
-	beforeCreate() {
-		// todo
-		let [{handler}] = this.$createElement('VColorPicker').componentOptions.Ctor.options.watch.value;
-		this.parseColor = function(value) {
-			let result;
-			handler.call({
-				updateColor(value) {
-					result = value;
-				},
-			}, value);
-			return result;
-		};
 	},
 	mounted() {
 		this.$watch(
@@ -86,22 +81,31 @@ export default {
 				}
 				({fallbackValue: value} = this);
 			}
-			// todo
+			let instance = Color.from(value);
 			let {noAlpha} = this;
-			let instance = this.parseColor(value);
-			let {r, g, b, a} = instance.rgba;
+			if (noAlpha) {
+				instance.a = 1;
+			} else {
+				instance.a = Number(instance.a.toFixed(3));
+			}
 			switch (format) {
+				case 'object.hsl': {
+					return instance.toObject('hsl', noAlpha);
+				}
+				case 'object.hsv': {
+					return instance.toObject('hsv', noAlpha);
+				}
 				case 'object.rgb': {
-					return (noAlpha
-						? {r, g, b}
-						: {r, g, b, a}
-					);
+					return instance.toObject('rgb', noAlpha);
+				}
+				case 'string.hex': {
+					return instance.toString('rgb');
+				}
+				case 'string.rgb': {
+					return instance.toString('hex');
 				}
 			}
-			return (noAlpha || a === 1
-				? instance.hex
-				: `rgba(${r}, ${g}, ${b}, ${a})`
-			);
+			return instance.toString();
 		},
 	},
 	render(h) {

@@ -6,6 +6,10 @@ A color input component for Vuetify.
 
 [Try it out!](https://seregpie.github.io/VuetifyColorInput/)
 
+## dependencies
+
+- [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
+
 ## setup
 
 ### npm
@@ -37,6 +41,7 @@ import VuetifyColorInput from 'vuetify-color-input/a-la-carte';
 />
 <script src="https://unpkg.com/vue@2"></script>
 <script src="https://unpkg.com/vuetify@2/dist/vuetify.min.js"></script>
+<script src="https://unpkg.com/chroma-js@2"></script>
 <script src="https://unpkg.com/vuetify-color-input"></script>
 ```
 

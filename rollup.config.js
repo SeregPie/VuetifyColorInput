@@ -19,12 +19,18 @@ if (process.env.ROLLUP_WATCH) {
 	}));
 }
 
+let globals = {
+	'chroma-js': 'chroma',
+};
+
 export default {
+	external: Object.keys(globals),
 	input: 'src/index.js',
 	plugins,
 	output: {
 		file: main,
 		format: 'umd',
 		name: 'VuetifyColorInput',
+		globals,
 	},
 };

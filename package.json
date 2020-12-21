@@ -21,6 +21,9 @@
 		"prepublishOnly": "npm run build",
 		"serve": "rollup -c -w"
 	},
+	"dependencies": {
+		"chroma-js": "^2"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.12.10",
 		"@babel/preset-env": "^7.12.11",
