@@ -86,41 +86,45 @@ Use the component inside a template.
 
 ## properties
 
-| name | type | default |
-| ---: | :--- | :--- |
-| `appendIcon` | `String` | |
-| `disabled` | `Boolean` | |
-| `error` | `Boolean` | |
-| `errorCount` | `[Number, String]` | `1` |
-| `errorMessages` | `[String, Array]` | `[]` |
-| `hideDetails` | `[Boolean, String]` | |
-| `hint` | `String` | |
-| `id` | `String` | |
-| `label` | `String` | |
-| `messages` | `[String, Array]` | `[]` |
-| `noAlpha` | `Boolean` | |
-| `persistentHint` | `Boolean` | |
-| `prependIcon` | `String` | |
-| `rules` | `Array` | `[]` |
-| `success` | `Boolean` | |
-| `successMessages` | `[String, Array]` | `[]` |
-| `validateOnBlur` | `Boolean` | |
-| `value` | | |
+| name | type | default | description |
+| ---: | :--- | :--- | :--- |
+| `noAlpha` | `Boolean` | `false` | Removes alpha. |
+
+Inherits from [v-input](https://vuetifyjs.com/api/v-input):
+- `appendIcon`
+- `disabled`
+- `error`
+- `errorCount`
+- `errorMessages`
+- `hideDetails`
+- `hint`
+- `id`
+- `label`
+- `messages`
+- `persistentHint`
+- `prependIcon`
+- `rules`
+- `success` 
+- `successMessages`
+- `validateOnBlur`
+
+Inherits from [v-color-picker](https://vuetifyjs.com/api/v-color-picker):
+- `value`
 
 ## slots
 
-| name |
-| ---: |
-| `append` |
-| `label` |
-| `message` |
-| `prepend` |
+Inherits from [v-input](https://vuetifyjs.com/api/v-input):
+- `append`
+- `label`
+- `message`
+- `prepend`
 
 ## events
 
-| name |
-| ---: |
-| `click:append` |
-| `click:prepend` |
-| `input` |
-| `update:error` |
+Inherits from [v-input](https://vuetifyjs.com/api/v-input):
+- `click:append`
+- `click:prepend`
+- `update:error`
+
+Inherits from [v-color-picker](https://vuetifyjs.com/api/v-color-picker):
+- `input`
