@@ -1,9 +1,9 @@
-(function() {
+(() => {
 
 	new Vue({
 		el: '#App',
 		vuetify: new Vuetify(),
-		data: function() {
+		data() {
 			return {
 				disabled: false,
 				drawer: true,
@@ -15,18 +15,18 @@
 		},
 		computed: {
 			dark: {
-				get: function() {
+				get() {
 					return this.$vuetify.theme.dark;
 				},
-				set: function(value) {
+				set(value) {
 					this.$vuetify.theme.dark = value;
 				},
 			},
 			rtl: {
-				get: function() {
+				get() {
 					return this.$vuetify.rtl;
 				},
-				set: function(value) {
+				set(value) {
 					this.$vuetify.rtl = value;
 				},
 			},
