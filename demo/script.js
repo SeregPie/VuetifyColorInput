@@ -46,6 +46,9 @@
 					},
 				];
 			},
+			valueFormatted() {
+				return JSON.stringify(this.value)
+			},
 		},
 	});
 

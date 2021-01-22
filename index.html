@@ -210,10 +210,20 @@
 				>
 					<div
 						style="
+							display: flex;
+							flex-direction: column;
+							gap: 16px;
 							max-width: 256px;
 							width: 100%;
 						"
 					>
+						<v-sheet
+							class="pa-4"
+							color="primary"
+							dark
+						>
+							<pre>{{ valueFormatted }}</pre>
+						</v-sheet>
 						<v-color-input
 							v-model="value"
 							:disabled="disabled"

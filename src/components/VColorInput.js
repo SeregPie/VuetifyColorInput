@@ -85,8 +85,6 @@ export default {
 			let {noAlpha} = this;
 			if (noAlpha) {
 				instance.a = 1;
-			} else {
-				instance.a = Number(instance.a.toFixed(3));
 			}
 			switch (format) {
 				case 'object.hsl': {
