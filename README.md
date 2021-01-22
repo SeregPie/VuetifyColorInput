@@ -104,7 +104,7 @@ Inherits from [v-input](https://vuetifyjs.com/api/v-input):
 - `persistentHint`
 - `prependIcon`
 - `rules`
-- `success` 
+- `success`
 - `successMessages`
 - `validateOnBlur`
 
