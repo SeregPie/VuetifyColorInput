@@ -23,7 +23,7 @@ export default {
 		validateOnBlur: Boolean,
 		value: {},
 	},
-	data () {
+	data() {
 		let {value} = this;
 		return {
 			fallbackValue: {r: 0, g: 0, b: 0, a: 0},
