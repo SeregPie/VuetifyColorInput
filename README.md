@@ -109,6 +109,16 @@ Inherits from [v-input](https://vuetifyjs.com/api/v-input):
 - `validateOnBlur`
 
 Inherits from [v-color-picker](https://vuetifyjs.com/api/v-color-picker):
+- `canvasHeight`
+- `dotSize`
+- `hideCanvas`
+- `hideInputs`
+- `hideModeSwitch`
+- `hideSliders`
+- `mode`
+- `showSwatches`
+- `swatches`
+- `swatchesMaxHeight`
 - `value`
 
 ## slots

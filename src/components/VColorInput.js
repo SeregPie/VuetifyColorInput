@@ -5,6 +5,7 @@ export default {
 	name: 'VColorInput',
 	props: {
 		appendIcon: String,
+		canvasHeight: {type: [String, Number]},
 		disabled: Boolean,
 		error: Boolean,
 		errorCount: {},
@@ -22,6 +23,18 @@ export default {
 		successMessages: {},
 		validateOnBlur: Boolean,
 		value: {},
+		dotSize: {type: [Number, String]},
+		hideCanvas: Boolean,
+		hideInputs: Boolean,
+		hideModeSwitch: Boolean,
+		hideSliders: Boolean,
+		mode: {
+			type: String,
+			default: 'hex',
+		},
+		showSwatches: Boolean,
+		swatches: Array,
+		swatchesMaxHeight: {type: [Number, String]},
 	},
 	data() {
 		let {value} = this;
@@ -41,6 +54,40 @@ export default {
 			},
 			set(value) {
 				this.lazyValue = value;
+			},
+		},
+		modeForColorPicker: {
+			get() {
+				let value = this.mode;
+				switch (value) {
+					case 'hex': {
+						return 'hexa';
+					}
+					case 'hsl': {
+						return 'hsla';
+					}
+					case 'rgb': {
+						return 'rgba';
+					}
+				}
+				return value;
+			},
+			set(value) {
+				value = (() => {
+					switch (value) {
+						case 'hexa': {
+							return 'hex';
+						}
+						case 'hsla': {
+							return 'hsl';
+						}
+						case 'rgba': {
+							return 'rgb';
+						}
+					}
+					return value;
+				})();
+				this.$emit('update:mode', value);
 			},
 		},
 		valueAsString() {
@@ -110,11 +157,17 @@ export default {
 		let {
 			$scopedSlots,
 			appendIcon,
+			canvasHeight,
 			disabled,
+			dotSize,
 			error,
 			errorCount,
 			errorMessages,
+			hideCanvas,
 			hideDetails,
+			hideInputs,
+			hideModeSwitch,
+			hideSliders,
 			hint,
 			id,
 			internalValue: value,
@@ -123,10 +176,14 @@ export default {
 			persistentHint,
 			prependIcon,
 			rules,
+			showSwatches,
 			success,
 			successMessages,
+			swatches,
+			swatchesMaxHeight,
 			validateOnBlur,
 			valueForColorPicker,
+			modeForColorPicker,
 		} = this;
 		return h(
 			'VInput',
@@ -150,19 +207,15 @@ export default {
 					value,
 				},
 				on: {
-					...(keys => {
-						let result = {};
-						keys.forEach(key => {
-							result[key] = ((...args) => {
-								this.$emit(key, ...args);
-							});
-						});
-						return result;
-					})([
-						'click:append',
-						'click:prepend',
-						'update:error',
-					]),
+					'click:append': ((...args) => {
+						this.$emit('click:append', ...args);
+					}),
+					'click:prepend': ((...args) => {
+						this.$emit('click:prepend', ...args);
+					}),
+					'update:error': ((...args) => {
+						this.$emit('update:error', ...args);
+					}),
 				},
 				scopedSlots: {
 					...((object, keys) => {
@@ -293,13 +346,25 @@ export default {
 								'VColorPicker',
 								{
 									props: {
+										canvasHeight,
 										disabled,
-										hideInputs: true,
+										dotSize,
+										hideCanvas,
+										hideInputs,
+										hideModeSwitch,
+										hideSliders,
+										mode: modeForColorPicker,
+										showSwatches,
+										swatches,
+										swatchesMaxHeight,
 										value: valueForColorPicker,
 									},
 									on: {
 										input: (value => {
 											this.internalValue = value;
+										}),
+										'update:mode': (value => {
+											this.modeForColorPicker = value;
 										}),
 									},
 								},

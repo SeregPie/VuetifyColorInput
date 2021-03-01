@@ -4,12 +4,24 @@
 		el: '#App',
 		vuetify: new Vuetify(),
 		data() {
+			let modeItems = [
+				'hex',
+				'rgb',
+				'hsl',
+			];
 			return {
 				disabled: false,
 				drawer: true,
+				hideCanvas: false,
 				hideDetails: false,
+				hideInputs: false,
+				hideModeSwitch: false,
+				hideSliders: false,
+				mode: modeItems[0],
+				modeItems,
 				noAlpha: false,
 				persistentHint: false,
+				showSwatches: false,
 				value: chroma.random().hex(),
 			};
 		},

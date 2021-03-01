@@ -162,16 +162,25 @@
 					"
 				>
 					<v-checkbox
-						v-model="disabled"
-						class="ma-0 pa-0"
-						hide-details
-						label="disabled"
-					></v-checkbox>
-					<v-checkbox
 						v-model="noAlpha"
 						class="ma-0 pa-0"
 						hide-details
 						label="no alpha"
+					></v-checkbox>
+				</div>
+				<v-divider></v-divider>
+				<div
+					style="
+						display: grid;
+						gap: 16px;
+						padding: 8px;
+					"
+				>
+					<v-checkbox
+						v-model="disabled"
+						class="ma-0 pa-0"
+						hide-details
+						label="disabled"
 					></v-checkbox>
 					<v-checkbox
 						v-model="hideDetails"
@@ -184,6 +193,52 @@
 						class="ma-0 pa-0"
 						hide-details
 						label="persistent hint"
+					></v-checkbox>
+				</div>
+				<v-divider></v-divider>
+				<div
+					style="
+						display: grid;
+						gap: 16px;
+						padding: 8px;
+					"
+				>
+					<v-checkbox
+						v-model="hideCanvas"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide canvas"
+					></v-checkbox>
+					<v-checkbox
+						v-model="hideSliders"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide sliders"
+					></v-checkbox>
+					<v-select
+						v-model="mode"
+						:items="modeItems"
+						filled
+						hide-details
+						label="mode"
+					></v-select>
+					<v-checkbox
+						v-model="hideInputs"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide inputs"
+					></v-checkbox>
+					<v-checkbox
+						v-model="hideModeSwitch"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide mode switch"
+					></v-checkbox>
+					<v-checkbox
+						v-model="showSwatches"
+						class="ma-0 pa-0"
+						hide-details
+						label="show swatches"
 					></v-checkbox>
 				</div>
 			</v-navigation-drawer>
@@ -227,10 +282,16 @@
 						<v-color-input
 							v-model="value"
 							:disabled="disabled"
+							:hide-canvas="hideCanvas"
 							:hide-details="hideDetails"
+							:hide-inputs="hideInputs"
+							:hide-mode-switch="hideModeSwitch"
+							:hide-sliders="hideSliders"
+							:mode.sync="mode"
 							:no-alpha="noAlpha"
 							:persistent-hint="persistentHint"
 							:rules="rules"
+							:show-swatches="showSwatches"
 							hint="The color should not be too light or too dark."
 							label="color"
 						></v-color-input>
