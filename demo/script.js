@@ -59,7 +59,7 @@
 				];
 			},
 			valueFormatted() {
-				return JSON.stringify(this.value)
+				return JSON.stringify(this.value);
 			},
 		},
 	});
