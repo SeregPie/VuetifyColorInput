@@ -218,20 +218,9 @@ export default {
 					}),
 				},
 				scopedSlots: {
-					...((object, keys) => {
-						let result = {};
-						keys.forEach(key => {
-							let value = object[key];
-							if (value !== undefined) {
-								result[key] = value;
-							}
-						});
-						return result;
-					})($scopedSlots, [
-						'append',
-						'message',
-						'prepend',
-					]),
+					'append': $scopedSlots['append'],
+					'message': $scopedSlots['message'],
+					'prepend': $scopedSlots['prepend'],
 				},
 				ref: 'input',
 			},
@@ -309,14 +298,14 @@ export default {
 											),
 										),
 										...(() => {
-											let $node;
-											let $slot = $scopedSlots['label'];
-											if ($slot) {
-												$node = $slot();
+											let content;
+											let slot = $scopedSlots['label'];
+											if (slot) {
+												content = slot();
 											} else {
 												let {label} = this;
 												if (label) {
-													$node = label;
+													content = label;
 												} else {
 													return [];
 												}
@@ -333,7 +322,7 @@ export default {
 															focused: !!validationState,
 														},
 													},
-													$node,
+													content,
 												)],
 											)];
 										})(),
@@ -341,7 +330,7 @@ export default {
 								)],
 							);
 						}),
-						default: (() => {
+						'default': (() => {
 							return h(
 								'VColorPicker',
 								{
@@ -360,7 +349,7 @@ export default {
 										value: valueForColorPicker,
 									},
 									on: {
-										input: (value => {
+										'input': (value => {
 											this.internalValue = value;
 										}),
 										'update:mode': (value => {
