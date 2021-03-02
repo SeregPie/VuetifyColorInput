@@ -1,8 +1,23 @@
+import BackgroundCheckered from '../styles/BackgroundCheckered';
+import BackgroundColor from '../styles/BackgroundColor';
+import BorderCircle from '../styles/BorderCircle';
+import FlexCenter from '../styles/FlexCenter';
+import OverflowHidden from '../styles/OverflowHidden';
+import Size from '../styles/Size';
+import SizeFull from '../styles/SizeFull';
+import TransitionPrimary from '../styles/TransitionPrimary';
 import Color from '../utils/Color';
 import isDeepEqual from '../utils/isDeepEqual';
 
 export default {
 	name: 'VColorInput',
+	inject: {
+		theme: {
+			default: {
+				isDark: false,
+			},
+		},
+	},
 	props: {
 		appendIcon: String,
 		canvasHeight: {type: [String, Number]},
@@ -48,6 +63,9 @@ export default {
 		};
 	},
 	computed: {
+		dark() {
+			return this.theme.isDark;
+		},
 		internalValue: {
 			get() {
 				return this.getValue(this.format, this.mandatory);
@@ -158,6 +176,7 @@ export default {
 			$scopedSlots,
 			appendIcon,
 			canvasHeight,
+			dark,
 			disabled,
 			dotSize,
 			error,
@@ -173,6 +192,7 @@ export default {
 			internalValue: value,
 			menuActive,
 			messages,
+			modeForColorPicker,
 			persistentHint,
 			prependIcon,
 			rules,
@@ -183,7 +203,6 @@ export default {
 			swatchesMaxHeight,
 			validateOnBlur,
 			valueForColorPicker,
-			modeForColorPicker,
 		} = this;
 		return h(
 			'VInput',
@@ -263,39 +282,55 @@ export default {
 										},
 									},
 									[
-										/*...(() => {
-											if (disabled) {
-												return [h()]
-											}
-											if (value) {
-												return [h()]
-											}
-											return [h()]
-										})(),*/
 										h(
 											'div',
 											{
 												style: {
-													background: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWNgYGCQwoKxgqGgcJA5h3yFAAs8BRWVSwooAAAAAElFTkSuQmCC) repeat',
-													borderRadius: '50%',
-													height: '24px',
-													overflow: 'hidden',
-													width: '24px',
+													...(() => {
+														if (disabled) {
+															return {};
+														}
+														if (value) {
+															return {
+																...(dark
+																	? BackgroundCheckered(8, '#fff', '#000')
+																	: BackgroundCheckered(8, '#f00', '#0f0')
+																),
+															};
+														}
+														return {};
+													})(),
+													...BorderCircle,
+													...OverflowHidden,
+													...Size('24px'),
+													...TransitionPrimary,
+													...FlexCenter,
 												},
 											},
-											(this.valueAsString
-												? [h(
-													'div',
-													{
-														style: {
-															background: this.valueAsString,
-															height: '100%',
-															width: '100%',
-														},
+											[h(
+												'div',
+												{
+													style: {
+														...(() => {
+															if (disabled) {
+																return {
+																	...BorderCircle,
+																	...Size('8px'),
+																	...BackgroundColor('#333'),
+																};
+															}
+															if (value) {
+																return {
+																	...SizeFull,
+																	...BackgroundColor(this.valueAsString),
+																};
+															}
+															return {};
+														})(),
+														...TransitionPrimary,
 													},
-												)]
-												: []
-											),
+												},
+											)]
 										),
 										...(() => {
 											let content;
