@@ -7,6 +7,8 @@ import RoundedFull from '../styles/RoundedFull';
 import Size from '../styles/Size';
 import SizeFull from '../styles/SizeFull';
 import Transition from '../styles/Transition';
+import PositionRelative from '../styles/PositionRelative';
+import PositionCenter from '../styles/PositionCenter';
 import UserSelectNone from '../styles/UserSelectNone';
 import Color from '../utils/Color';
 import isDeepEqual from '../utils/isDeepEqual';
@@ -288,25 +290,9 @@ export default {
 											'div',
 											{
 												style: {
-													...(() => {
-														if (disabled) {
-															return {};
-														}
-														if (value) {
-															return {
-																...(dark
-																	? BackgroundCheckered(8, '#fff', '#000')
-																	: BackgroundCheckered(8, '#f00', '#0f0')
-																),
-															};
-														}
-														return {};
-													})(),
-													...RoundedFull,
-													...OverflowHidden,
 													...Size('24px'),
 													...Transition,
-													...FlexCenter,
+													...PositionRelative,
 												},
 											},
 											[h(
@@ -316,25 +302,52 @@ export default {
 														...(() => {
 															if (disabled) {
 																return {
-																	...RoundedFull,
 																	...Size('8px'),
-																	...(dark
-																		? BackgroundColor('hsla(0,0%,100%,.2)')
-																		: BackgroundColor('rgba(0,0,0,.26)')
-																	),
 																};
 															}
 															if (value) {
 																return {
 																	...SizeFull,
-																	...BackgroundColor(this.valueAsString),
+																	...(dark
+																		? BackgroundCheckered(8, '#fff', '#000')
+																		: BackgroundCheckered(8, '#f00', '#0f0')
+																	),
 																};
 															}
 															return {};
 														})(),
+														...OverflowHidden,
+														...PositionCenter,
+														...RoundedFull,
 														...Transition,
+
 													},
 												},
+												[h(
+													'div',
+													{
+														style: {
+															...(() => {
+																if (disabled) {
+																	return {
+																		...(dark
+																			? BackgroundColor('hsla(0,0%,100%,.2)')
+																			: BackgroundColor('rgba(0,0,0,.26)')
+																		),
+																	};
+																}
+																if (value) {
+																	return {
+																		...BackgroundColor(this.valueAsString),
+																	};
+																}
+																return {};
+															})(),
+															...SizeFull,
+															...Transition,
+														},
+													},
+												)],
 											)]
 										),
 										...(() => {
