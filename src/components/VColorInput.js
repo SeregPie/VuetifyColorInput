@@ -1,11 +1,13 @@
 import BackgroundCheckered from '../styles/BackgroundCheckered';
 import BackgroundColor from '../styles/BackgroundColor';
-import BorderCircle from '../styles/BorderCircle';
 import FlexCenter from '../styles/FlexCenter';
 import OverflowHidden from '../styles/OverflowHidden';
+import PointerEventsNone from '../styles/PointerEventsNone';
+import RoundedFull from '../styles/RoundedFull';
 import Size from '../styles/Size';
 import SizeFull from '../styles/SizeFull';
-import TransitionPrimary from '../styles/TransitionPrimary';
+import Transition from '../styles/Transition';
+import UserSelectNone from '../styles/UserSelectNone';
 import Color from '../utils/Color';
 import isDeepEqual from '../utils/isDeepEqual';
 
@@ -273,12 +275,12 @@ export default {
 									'div',
 									{
 										style: {
+											...PointerEventsNone,
+											...UserSelectNone,
 											alignItems: 'center',
 											display: 'grid',
 											gap: '8px',
 											gridTemplateColumns: 'auto 1fr',
-											pointerEvents: 'none',
-											userSelect: 'none',
 										},
 									},
 									[
@@ -300,10 +302,10 @@ export default {
 														}
 														return {};
 													})(),
-													...BorderCircle,
+													...RoundedFull,
 													...OverflowHidden,
 													...Size('24px'),
-													...TransitionPrimary,
+													...Transition,
 													...FlexCenter,
 												},
 											},
@@ -314,9 +316,12 @@ export default {
 														...(() => {
 															if (disabled) {
 																return {
-																	...BorderCircle,
+																	...RoundedFull,
 																	...Size('8px'),
-																	...BackgroundColor('#333'),
+																	...(dark
+																		? BackgroundColor('hsla(0,0%,100%,.2)')
+																		: BackgroundColor('rgba(0,0,0,.26)')
+																	),
 																};
 															}
 															if (value) {
@@ -327,7 +332,7 @@ export default {
 															}
 															return {};
 														})(),
-														...TransitionPrimary,
+														...Transition,
 													},
 												},
 											)]
