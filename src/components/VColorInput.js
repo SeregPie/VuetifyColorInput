@@ -1,14 +1,13 @@
 import BackgroundCheckered from '../styles/BackgroundCheckered';
 import BackgroundColor from '../styles/BackgroundColor';
-import FlexCenter from '../styles/FlexCenter';
 import OverflowHidden from '../styles/OverflowHidden';
 import PointerEventsNone from '../styles/PointerEventsNone';
+import PositionCenter from '../styles/PositionCenter';
+import PositionRelative from '../styles/PositionRelative';
 import RoundedFull from '../styles/RoundedFull';
 import Size from '../styles/Size';
 import SizeFull from '../styles/SizeFull';
 import Transition from '../styles/Transition';
-import PositionRelative from '../styles/PositionRelative';
-import PositionCenter from '../styles/PositionCenter';
 import UserSelectNone from '../styles/UserSelectNone';
 import Color from '../utils/Color';
 import isDeepEqual from '../utils/isDeepEqual';
@@ -291,7 +290,6 @@ export default {
 											{
 												style: {
 													...Size('24px'),
-													...Transition,
 													...PositionRelative,
 												},
 											},
