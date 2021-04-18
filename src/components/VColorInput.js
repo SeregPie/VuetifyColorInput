@@ -1,14 +1,7 @@
-import BackgroundCheckered from '../styles/BackgroundCheckered';
-import BackgroundColor from '../styles/BackgroundColor';
-import BorderColor from '../styles/BorderColor';
-import BorderStyleSolid from '../styles/BorderStyleSolid';
-import BorderWidth from '../styles/BorderWidth';
 import InteractivityNone from '../styles/InteractivityNone';
-import OverflowHidden from '../styles/OverflowHidden';
 import PositionCenter from '../styles/PositionCenter';
 import PositionRelative from '../styles/PositionRelative';
 import RoundedFull from '../styles/RoundedFull';
-import Size from '../styles/Size';
 import SizeFull from '../styles/SizeFull';
 import Transition from '../styles/Transition';
 import Color from '../utils/Color';
@@ -294,8 +287,9 @@ export default {
 											'div',
 											{
 												style: {
-													...Size('24px'),
 													...PositionRelative,
+													height: '24px',
+													width: '24px',
 												},
 											},
 											[(() => {

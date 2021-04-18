@@ -1,6 +1,8 @@
+import PositionAbsolute from './PositionAbsolute';
+
 export default {
+	...PositionAbsolute,
 	bottom: '50%',
-	position: 'absolute',
 	right: '50%',
 	transform: 'translate(50%,50%)',
 };
