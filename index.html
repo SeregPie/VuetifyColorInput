@@ -28,6 +28,10 @@
 		<script src="https://unpkg.com/vuetify@2/dist/vuetify.min.js"></script>
 		<script src="https://unpkg.com/chroma-js@2"></script>
 		<script src="./index.js"></script>
+		<script
+			defer
+			src="./demo/script.js"
+		></script>
 	</head>
 	<body>
 		<v-app
@@ -268,7 +272,7 @@
 							display: flex;
 							flex-direction: column;
 							gap: 16px;
-							max-width: 256px;
+							max-width: 300px;
 							width: 100%;
 						"
 					>
@@ -277,10 +281,10 @@
 							color="primary"
 							dark
 						>
-							<pre>{{ valueFormatted }}</pre>
+							<pre>{{ colorFormatted }}</pre>
 						</v-sheet>
 						<v-color-input
-							v-model="value"
+							v-model="color"
 							:disabled="disabled"
 							:hide-canvas="hideCanvas"
 							:hide-details="hideDetails"
@@ -294,11 +298,16 @@
 							:show-swatches="showSwatches"
 							hint="The color should not be too light or too dark."
 							label="color"
-						></v-color-input>
+						>
+							<template v-slot:actions="{clear}">
+								<v-btn
+									@click="clear()"
+								>clear</v-btn>
+							</template>
+						</v-color-input>
 					</div>
 				</v-container>
 			</v-main>
 		</v-app>
-		<script src="./demo/script.js"></script>
 	</body>
 </html>

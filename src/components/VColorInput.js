@@ -1,14 +1,16 @@
 import BackgroundCheckered from '../styles/BackgroundCheckered';
 import BackgroundColor from '../styles/BackgroundColor';
+import BorderColor from '../styles/BorderColor';
+import BorderStyleSolid from '../styles/BorderStyleSolid';
+import BorderWidth from '../styles/BorderWidth';
+import InteractivityNone from '../styles/InteractivityNone';
 import OverflowHidden from '../styles/OverflowHidden';
-import PointerEventsNone from '../styles/PointerEventsNone';
 import PositionCenter from '../styles/PositionCenter';
 import PositionRelative from '../styles/PositionRelative';
 import RoundedFull from '../styles/RoundedFull';
 import Size from '../styles/Size';
 import SizeFull from '../styles/SizeFull';
 import Transition from '../styles/Transition';
-import UserSelectNone from '../styles/UserSelectNone';
 import Color from '../utils/Color';
 import isDeepEqual from '../utils/isDeepEqual';
 
@@ -173,6 +175,9 @@ export default {
 			}
 			return instance.toString();
 		},
+		clear() {
+			this.internalValue = null;
+		},
 	},
 	render(h) {
 		let {
@@ -206,6 +211,7 @@ export default {
 			swatchesMaxHeight,
 			validateOnBlur,
 			valueForColorPicker,
+			clear,
 		} = this;
 		return h(
 			'VInput',
@@ -276,8 +282,7 @@ export default {
 									'div',
 									{
 										style: {
-											...PointerEventsNone,
-											...UserSelectNone,
+											...InteractivityNone,
 											alignItems: 'center',
 											display: 'grid',
 											gap: '8px',
@@ -293,7 +298,92 @@ export default {
 													...PositionRelative,
 												},
 											},
-											[h(
+											[(() => {
+												let {validationState} = this;
+												return h(
+													'div',
+													{
+														class: validationState,
+														style: {
+															...PositionCenter,
+															...RoundedFull,
+															...SizeFull,
+															...Transition,
+															backgroundColor: 'transparent !important',
+															borderWidth: '2px',
+															borderStyle: 'solid',
+															borderColor: (disabled
+																? (dark
+																	? 'hsla(0,0%,100%,.3)'
+																	: 'rgba(0,0,0,.26)'
+																)
+																: (dark
+																	? '#fff'
+																	: 'rgba(0,0,0,.54)'
+																)
+															),
+														},
+													},
+												);
+
+
+												/*if (disabled) {
+													return h(
+														'div',
+														{
+															style: {
+																...PositionCenter,
+																...RoundedFull,
+																...Size(0),
+																...Transition,
+																borderWidth: '4px',
+																borderStyle: 'solid',
+																borderColor: (dark
+																	? 'hsla(0,0%,100%,.2)'
+																	: 'rgba(0,0,0,.26)'
+																),
+															},
+														},
+													);
+												}
+												if (value) {
+													return h(
+														'div',
+														{
+															style: {
+																...PositionCenter,
+																...RoundedFull,
+																...Size(0),
+																...Transition,
+																borderWidth: '4px',
+																borderStyle: 'solid',
+																borderColor: (dark
+																	? 'hsla(0,0%,100%,.2)'
+																	: 'rgba(0,0,0,.26)'
+																),
+															},
+														},
+													);
+												}
+												return h(
+													'div',
+													{
+														style: {
+															...PositionCenter,
+															...RoundedFull,
+															...SizeFull,
+															...Transition,
+															borderWidth: '4px',
+															borderStyle: 'solid',
+															borderColor: (dark
+																? 'hsla(0,0%,100%,.2)'
+																: 'rgba(0,0,0,.26)'
+															),
+														},
+													},
+												);*/
+											})()]
+											/*[h(
 												'div',
 												{
 													style: {
@@ -306,10 +396,6 @@ export default {
 															if (value) {
 																return {
 																	...SizeFull,
-																	...(dark
-																		? BackgroundCheckered(8, '#fff', '#000')
-																		: BackgroundCheckered(8, '#f00', '#0f0')
-																	),
 																};
 															}
 															return {};
@@ -318,7 +404,10 @@ export default {
 														...PositionCenter,
 														...RoundedFull,
 														...Transition,
-
+														...(dark
+															? BackgroundCheckered(8, '#fff', '#000')
+															: BackgroundCheckered(8, '#f00', '#0f0')
+														),
 													},
 												},
 												[h(
@@ -346,7 +435,7 @@ export default {
 														},
 													},
 												)],
-											)]
+											)],*/
 										),
 										...(() => {
 											let content;
@@ -383,31 +472,47 @@ export default {
 						}),
 						'default': (() => {
 							return h(
-								'VColorPicker',
-								{
-									props: {
-										canvasHeight,
-										disabled,
-										dotSize,
-										hideCanvas,
-										hideInputs,
-										hideModeSwitch,
-										hideSliders,
-										mode: modeForColorPicker,
-										showSwatches,
-										swatches,
-										swatchesMaxHeight,
-										value: valueForColorPicker,
-									},
-									on: {
-										'input': (value => {
-											this.internalValue = value;
-										}),
-										'update:mode': (value => {
-											this.modeForColorPicker = value;
-										}),
-									},
-								},
+								'VCard',
+								[
+									h(
+										'VColorPicker',
+										{
+											props: {
+												canvasHeight,
+												disabled,
+												dotSize,
+												flat: true,
+												hideCanvas,
+												hideInputs,
+												hideModeSwitch,
+												hideSliders,
+												mode: modeForColorPicker,
+												showSwatches,
+												swatches,
+												swatchesMaxHeight,
+												value: valueForColorPicker,
+											},
+											on: {
+												'input': (value => {
+													this.internalValue = value;
+												}),
+												'update:mode': (value => {
+													this.modeForColorPicker = value;
+												}),
+											},
+										},
+									),
+									...(() => {
+										let slot = $scopedSlots['actions'];
+										if (slot) {
+											return [h(
+												'VCardActions',
+												slot({clear}),
+											)];
+										}
+										return [];
+									})(),
+								],
 							);
 						}),
 					},

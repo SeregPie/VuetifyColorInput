@@ -10,6 +10,7 @@
 				'hsl',
 			];
 			return {
+				color: chroma.random().hex(),
 				disabled: false,
 				drawer: true,
 				hideCanvas: false,
@@ -22,7 +23,6 @@
 				noAlpha: false,
 				persistentHint: false,
 				showSwatches: false,
-				value: chroma.random().hex(),
 			};
 		},
 		computed: {
@@ -58,8 +58,8 @@
 					},
 				];
 			},
-			valueFormatted() {
-				return JSON.stringify(this.value);
+			colorFormatted() {
+				return JSON.stringify(this.color);
 			},
 		},
 	});
