@@ -9,7 +9,7 @@ let plugins = [
 		babelHelpers: 'bundled',
 		presets: ['@babel/preset-env'],
 	}),
-	terser(),
+	//terser(),
 ];
 
 if (process.env.ROLLUP_WATCH) {

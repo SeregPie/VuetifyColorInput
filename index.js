@@ -1,1 +1,822 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t(require("chroma-js")):"function"==typeof define&&define.amd?define(["chroma-js"],t):(e="undefined"!=typeof globalThis?globalThis:e||self).VuetifyColorInput=t(e.chroma)}(this,(function(e){"use strict";function t(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var r=t(e);function n(e){return(n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function i(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function a(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function o(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e);t&&(n=n.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),r.push.apply(r,n)}return r}function s(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?o(Object(r),!0).forEach((function(t){a(e,t,r[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):o(Object(r)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))}))}return e}function u(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){if("undefined"==typeof Symbol||!(Symbol.iterator in Object(e)))return;var r=[],n=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){i=!0,a=e}finally{try{n||null==s.return||s.return()}finally{if(i)throw a}}return r}(e,t)||c(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function l(e){return function(e){if(Array.isArray(e))return h(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||c(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function c(e,t){if(e){if("string"==typeof e)return h(e,t);var r=Object.prototype.toString.call(e).slice(8,-1);return"Object"===r&&e.constructor&&(r=e.constructor.name),"Map"===r||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?h(e,t):void 0}}function h(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=new Array(t);r<t;r++)n[r]=e[r];return n}var f={pointerEvents:"none",userDrag:"none",userSelect:"none"},d=s(s({},{position:"absolute"}),{},{bottom:"50%",right:"50%",transform:"translate(50%,50%)"}),p={position:"relative"},b={borderRadius:"9999px"};var g=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:e;return{height:t,width:e}}("100%"),v={transition:"all .3s cubic-bezier(.25,.8,.5,1)"},y=function(){function e(t,r,n,i){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),Object.assign(this,{r:t,g:r,b:n,a:i})}var t,n,a;return t=e,a=[{key:"from",value:function(e){var t=u(r.default(e).rgba(),4),n=t[0],i=t[1],a=t[2],o=t[3];return new this(n,i,a,o=Number(o.toFixed(3)))}}],(n=[{key:"toObject",value:function(e,t){var n=this,i=function(){var t=n.r,i=n.g,a=n.b,o=n.a;switch(e){case"hsl":var s=r.default({r:t,g:i,b:a,a:h}).hsl(),u=s.h,l=s.s,c=s.l,h=s.a;return{h:u,s:l,l:c,a:h};case"hsv":var f=r.default({r:t,g:i,b:a,a:g}).hsv(),d=f.h,p=f.s,b=f.v,g=f.a;return{h:d,s:p,v:b,a:g}}return{r:t,g:i,b:a,a:o}}();return t&&delete i.a,i}},{key:"toString",value:function(e){var t=this.r,n=this.g,i=this.b,a=this.a;switch(e){case"hex":return r.default({r:t,g:n,b:i,a:a}).hex();case"rgb":return r.default({r:t,g:n,b:i,a:a}).css()}return a<1?r.default({r:t,g:n,b:i,a:a}).css():r.default({r:t,g:n,b:i,a:a}).hex()}}])&&i(t.prototype,n),a&&i(t,a),e}(),m=Array.isArray,S=Object.is;function w(e){if(e){var t=n(e);return"object"===t||"function"===t}return!1}function j(e,t){if(S(e,t))return!0;if(m(e)){if(m(t)){var r=e.length;if(r===t.length){for(var n=0;n<r;n++)if(!j(e[n],t[n]))return!1;return!0}}}else if(w(e)&&w(t)){var i=Object.keys(e).sort();if(j(i,Object.keys(t).sort())&&(e=i.map((function(t){return e[t]})),t=i.map((function(e){return t[e]})),j(e,t)))return!0}return!1}var O,k,V={name:"VColorInput",inject:{theme:{default:{isDark:!1}}},props:{appendIcon:String,canvasHeight:{type:[String,Number]},disabled:Boolean,error:Boolean,errorCount:{},errorMessages:{},hideDetails:[Boolean,String],hint:{},id:{},label:String,messages:{},noAlpha:Boolean,persistentHint:Boolean,prependIcon:{},rules:{},success:Boolean,successMessages:{},validateOnBlur:Boolean,value:{},dotSize:{type:[Number,String]},hideCanvas:Boolean,hideInputs:Boolean,hideModeSwitch:Boolean,hideSliders:Boolean,mode:{type:String,default:"hex"},showSwatches:Boolean,swatches:Array,swatchesMaxHeight:{type:[Number,String]}},data:function(){return{fallbackValue:{r:0,g:0,b:0,a:0},format:"string",lazyValue:this.value,mandatory:!1,menuActive:!1,validationState:void 0}},computed:{dark:function(){return this.theme.isDark},internalValue:{get:function(){return this.getValue(this.format,this.mandatory)},set:function(e){this.lazyValue=e}},modeForColorPicker:{get:function(){var e=this.mode;switch(e){case"hex":return"hexa";case"hsl":return"hsla";case"rgb":return"rgba"}return e},set:function(e){e=function(){switch(e){case"hexa":return"hex";case"hsla":return"hsl";case"rgba":return"rgb"}return e}(),this.$emit("update:mode",e)}},valueAsString:function(){return this.getValue("string",!0)},valueForColorPicker:function(){return this.getValue("object.rgb",!0)}},watch:{internalValue:{handler:function(e,t){j(e,t)||this.$emit("input",e)},immediate:!0},value:function(e){this.lazyValue=e}},mounted:function(){var e=this;this.$watch((function(){return e.$refs.input.validationState}),(function(t){e.validationState=t}),{immediate:!0})},methods:{getValue:function(e,t){var r=this.lazyValue;if(!r){if(!t)return null;r=this.fallbackValue}var n=y.from(r),i=this.noAlpha;switch(i&&(n.a=1),e){case"object.hsl":return n.toObject("hsl",i);case"object.hsv":return n.toObject("hsv",i);case"object.rgb":return n.toObject("rgb",i);case"string.hex":return n.toString("rgb");case"string.rgb":return n.toString("hex")}return n.toString()},clear:function(){this.internalValue=null}},render:function(e){var t=this,r=this.$scopedSlots,n=this.appendIcon,i=this.canvasHeight,a=this.dark,o=this.disabled,u=this.dotSize,c=this.error,h=this.errorCount,y=this.errorMessages,m=this.hideCanvas,S=this.hideDetails,w=this.hideInputs,j=this.hideModeSwitch,O=this.hideSliders,k=this.hint,V=this.id,C=this.internalValue,x=this.menuActive,A=this.messages,I=this.modeForColorPicker,P=this.persistentHint,B=this.prependIcon,M=this.rules,D=this.showSwatches,H=this.success,$=this.successMessages,z=this.swatches,T=this.swatchesMaxHeight,E=this.validateOnBlur,F=this.valueForColorPicker,N=this.clear;return e("VInput",{props:{appendIcon:n,disabled:o,error:c,errorCount:h,errorMessages:y,hideDetails:S,hint:k,id:V,messages:A,persistentHint:P,prependIcon:B,rules:M,success:H,successMessages:$,validateOnBlur:E,value:C},on:{"click:append":function(){for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];t.$emit.apply(t,["click:append"].concat(r))},"click:prepend":function(){for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];t.$emit.apply(t,["click:prepend"].concat(r))},"update:error":function(){for(var e=arguments.length,r=new Array(e),n=0;n<e;n++)r[n]=arguments[n];t.$emit.apply(t,["update:error"].concat(r))}},scopedSlots:{append:r.append,message:r.message,prepend:r.prepend},ref:"input"},[e("VMenu",{ref:"menu",props:{closeOnContentClick:!1,disabled:o,offsetY:!0,value:x},on:{input:function(e){t.menuActive=e}},scopedSlots:{activator:function(n){var i,u=n.attrs,c=n.on;return e("div",{attrs:u,on:c},[e("div",{style:s(s({},f),{},{alignItems:"center",display:"grid",gap:"8px",gridTemplateColumns:"auto 1fr"})},[e("div",{style:s(s({},p),{},{height:"24px",width:"24px"})},[(i=t.validationState,e("div",{class:i,style:s(s(s(s(s({},d),b),g),v),{},{backgroundColor:"transparent !important",borderWidth:"2px",borderStyle:"solid",borderColor:o?a?"hsla(0,0%,100%,.3)":"rgba(0,0,0,.26)":a?"#fff":"rgba(0,0,0,.54)"})}))])].concat(l(function(){var n,i=r.label;if(i)n=i();else{var a=t.label;if(!a)return[];n=a}var s=t.validationState;return[e("div",[e("VLabel",{props:{color:s,disabled:o,focused:!!s}},n)])]}())))])},default:function(){return e("VCard",[e("VColorPicker",{props:{canvasHeight:i,disabled:o,dotSize:u,flat:!0,hideCanvas:m,hideInputs:w,hideModeSwitch:j,hideSliders:O,mode:I,showSwatches:D,swatches:z,swatchesMaxHeight:T,value:F},on:{input:function(e){t.internalValue=e},"update:mode":function(e){t.modeForColorPicker=e}}})].concat(l((n=r.actions)?[e("VCardActions",n({clear:N}))]:[])));var n}}})])}};return null===(O=globalThis.window)||void 0===O||null===(k=O.Vue)||void 0===k||k.component(V.name,V),V}));
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('chroma-js')) :
+  typeof define === 'function' && define.amd ? define(['chroma-js'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.VuetifyColorInput = factory(global.chroma));
+}(this, (function (chroma) { 'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var chroma__default = /*#__PURE__*/_interopDefaultLegacy(chroma);
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function BackgroundPattern (svg, size, color) {
+    return {
+      background: "url('data:image/svg+xml;base64,".concat(btoa(svg), "') center center / ").concat(size, "px ").concat(size, "px repeat ").concat(color)
+    };
+  }
+
+  function BackgroundCheckered (gridSize, gridColor0, gridColor1) {
+    var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 2 2\" fill=\"".concat(gridColor0, "\"><rect x=\"1\" width=\"1\" height=\"1\"/><rect y=\"1\" width=\"1\" height=\"1\"/></svg>");
+    var size = gridSize * 2;
+    return BackgroundPattern(svg, size, gridColor1);
+  }
+
+  var InteractivityNone = {
+    pointerEvents: 'none',
+    userDrag: 'none',
+    userSelect: 'none'
+  };
+
+  var PositionAbsolute = {
+    position: 'absolute'
+  };
+
+  var PositionCover = _objectSpread2(_objectSpread2({}, PositionAbsolute), {}, {
+    bottom: 0,
+    left: 0,
+    right: 0,
+    top: 0
+  });
+
+  var PositionRelative = {
+    position: 'relative'
+  };
+
+  var RoundedFull = {
+    borderRadius: '9999px'
+  };
+
+  var Transition = {
+    transition: 'all .3s cubic-bezier(.25,.8,.5,1)'
+  };
+
+  var _default = /*#__PURE__*/function () {
+    function _default(r, g, b, a) {
+      _classCallCheck(this, _default);
+
+      Object.assign(this, {
+        r: r,
+        g: g,
+        b: b,
+        a: a
+      });
+    }
+
+    _createClass(_default, [{
+      key: "toObject",
+      value: function toObject(format, noAlpha) {
+        var _this = this;
+
+        var result = function () {
+          var r = _this.r,
+              g = _this.g,
+              b = _this.b,
+              a = _this.a;
+
+          switch (format) {
+            case 'hsl':
+              {
+                var _chroma$hsl = chroma__default['default']({
+                  r: r,
+                  g: g,
+                  b: b,
+                  a: _a
+                }).hsl(),
+                    h = _chroma$hsl.h,
+                    s = _chroma$hsl.s,
+                    l = _chroma$hsl.l,
+                    _a = _chroma$hsl.a;
+
+                return {
+                  h: h,
+                  s: s,
+                  l: l,
+                  a: _a
+                };
+              }
+
+            case 'hsv':
+              {
+                var _chroma$hsv = chroma__default['default']({
+                  r: r,
+                  g: g,
+                  b: b,
+                  a: _a2
+                }).hsv(),
+                    _h = _chroma$hsv.h,
+                    _s = _chroma$hsv.s,
+                    v = _chroma$hsv.v,
+                    _a2 = _chroma$hsv.a;
+
+                return {
+                  h: _h,
+                  s: _s,
+                  v: v,
+                  a: _a2
+                };
+              }
+          }
+
+          return {
+            r: r,
+            g: g,
+            b: b,
+            a: a
+          };
+        }();
+
+        if (noAlpha) {
+          delete result.a;
+        }
+
+        return result;
+      }
+    }, {
+      key: "toString",
+      value: function toString(format) {
+        var r = this.r,
+            g = this.g,
+            b = this.b,
+            a = this.a;
+
+        switch (format) {
+          case 'hex':
+            {
+              return chroma__default['default']({
+                r: r,
+                g: g,
+                b: b,
+                a: a
+              }).hex();
+            }
+
+          case 'rgb':
+            {
+              return chroma__default['default']({
+                r: r,
+                g: g,
+                b: b,
+                a: a
+              }).css();
+            }
+        }
+
+        return a < 1 ? chroma__default['default']({
+          r: r,
+          g: g,
+          b: b,
+          a: a
+        }).css() : chroma__default['default']({
+          r: r,
+          g: g,
+          b: b,
+          a: a
+        }).hex();
+      }
+    }], [{
+      key: "from",
+      value: function from(value) {
+        var _chroma$rgba = chroma__default['default'](value).rgba(),
+            _chroma$rgba2 = _slicedToArray(_chroma$rgba, 4),
+            r = _chroma$rgba2[0],
+            g = _chroma$rgba2[1],
+            b = _chroma$rgba2[2],
+            a = _chroma$rgba2[3];
+
+        a = Number(a.toFixed(3));
+        return new this(r, g, b, a);
+      }
+    }]);
+
+    return _default;
+  }();
+
+  var isArray = Array.isArray;
+
+  var isEqual = Object.is;
+
+  function isObject (value) {
+    if (value) {
+      var type = _typeof(value);
+
+      return type === 'object' || type === 'function';
+    }
+
+    return false;
+  }
+
+  function isDeepEqual(value, otherValue) {
+    if (isEqual(value, otherValue)) {
+      return true;
+    }
+
+    if (isArray(value)) {
+      if (isArray(otherValue)) {
+        var length = value.length;
+        var otherLength = otherValue.length;
+
+        if (length === otherLength) {
+          for (var i = 0; i < length; i++) {
+            if (!isDeepEqual(value[i], otherValue[i])) {
+              return false;
+            }
+          }
+
+          return true;
+        }
+      }
+    } else if (isObject(value)) {
+      if (isObject(otherValue)) {
+        var keys = Object.keys(value).sort();
+        var otherKeys = Object.keys(otherValue).sort();
+
+        if (isDeepEqual(keys, otherKeys)) {
+          value = keys.map(function (k) {
+            return value[k];
+          });
+          otherValue = keys.map(function (k) {
+            return otherValue[k];
+          });
+
+          if (isDeepEqual(value, otherValue)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
+  var Component = {
+    name: 'VColorInput',
+    inject: {
+      theme: {
+        "default": {
+          isDark: false
+        }
+      }
+    },
+    props: {
+      appendIcon: String,
+      canvasHeight: {
+        type: [String, Number]
+      },
+      disabled: Boolean,
+      error: Boolean,
+      errorCount: {},
+      errorMessages: {},
+      hideDetails: [Boolean, String],
+      hint: {},
+      id: {},
+      label: String,
+      messages: {},
+      noAlpha: Boolean,
+      persistentHint: Boolean,
+      prependIcon: {},
+      rules: {},
+      success: Boolean,
+      successMessages: {},
+      validateOnBlur: Boolean,
+      value: {},
+      dotSize: {
+        type: [Number, String]
+      },
+      hideCanvas: Boolean,
+      hideInputs: Boolean,
+      hideModeSwitch: Boolean,
+      hideSliders: Boolean,
+      mode: {
+        type: String,
+        "default": 'hex'
+      },
+      showSwatches: Boolean,
+      swatches: Array,
+      swatchesMaxHeight: {
+        type: [Number, String]
+      }
+    },
+    data: function data() {
+      var value = this.value;
+      return {
+        fallbackValue: {
+          r: 0,
+          g: 0,
+          b: 0,
+          a: 0
+        },
+        format: 'string',
+        lazyValue: value,
+        mandatory: false,
+        menuActive: false,
+        validationState: undefined
+      };
+    },
+    computed: {
+      dark: function dark() {
+        return this.theme.isDark;
+      },
+      internalValue: {
+        get: function get() {
+          return this.getValue(this.format, this.mandatory);
+        },
+        set: function set(value) {
+          this.lazyValue = value;
+        }
+      },
+      modeForColorPicker: {
+        get: function get() {
+          var value = this.mode;
+
+          switch (value) {
+            case 'hex':
+              {
+                return 'hexa';
+              }
+
+            case 'hsl':
+              {
+                return 'hsla';
+              }
+
+            case 'rgb':
+              {
+                return 'rgba';
+              }
+          }
+
+          return value;
+        },
+        set: function set(value) {
+          value = function () {
+            switch (value) {
+              case 'hexa':
+                {
+                  return 'hex';
+                }
+
+              case 'hsla':
+                {
+                  return 'hsl';
+                }
+
+              case 'rgba':
+                {
+                  return 'rgb';
+                }
+            }
+
+            return value;
+          }();
+
+          this.$emit('update:mode', value);
+        }
+      },
+      valueAsString: function valueAsString() {
+        return this.getValue('string', true);
+      },
+      valueForColorPicker: function valueForColorPicker() {
+        return this.getValue('object.rgb', true);
+      }
+    },
+    watch: {
+      internalValue: {
+        handler: function handler(value, oldValue) {
+          if (!isDeepEqual(value, oldValue)) {
+            this.$emit('input', value);
+          }
+        },
+        immediate: true
+      },
+      value: function value(_value) {
+        this.lazyValue = _value;
+      }
+    },
+    mounted: function mounted() {
+      var _this = this;
+
+      this.$watch(function () {
+        return _this.$refs['input'].validationState;
+      }, function (value) {
+        _this.validationState = value;
+      }, {
+        immediate: true
+      });
+    },
+    methods: {
+      getValue: function getValue(format, mandatory) {
+        var value = this.lazyValue;
+
+        if (!value) {
+          if (!mandatory) {
+            return null;
+          }
+
+          value = this.fallbackValue;
+        }
+
+        var instance = _default.from(value);
+        var noAlpha = this.noAlpha;
+
+        if (noAlpha) {
+          instance.a = 1;
+        }
+
+        switch (format) {
+          case 'object.hsl':
+            {
+              return instance.toObject('hsl', noAlpha);
+            }
+
+          case 'object.hsv':
+            {
+              return instance.toObject('hsv', noAlpha);
+            }
+
+          case 'object.rgb':
+            {
+              return instance.toObject('rgb', noAlpha);
+            }
+
+          case 'string.hex':
+            {
+              return instance.toString('rgb');
+            }
+
+          case 'string.rgb':
+            {
+              return instance.toString('hex');
+            }
+        }
+
+        return instance.toString();
+      },
+      clear: function clear() {
+        this.internalValue = null;
+      }
+    },
+    render: function render(h) {
+      var _this2 = this;
+
+      var $scopedSlots = this.$scopedSlots,
+          appendIcon = this.appendIcon,
+          canvasHeight = this.canvasHeight,
+          clear = this.clear,
+          dark = this.dark,
+          disabled = this.disabled,
+          dotSize = this.dotSize,
+          error = this.error,
+          errorCount = this.errorCount,
+          errorMessages = this.errorMessages,
+          hideCanvas = this.hideCanvas,
+          hideDetails = this.hideDetails,
+          hideInputs = this.hideInputs,
+          hideModeSwitch = this.hideModeSwitch,
+          hideSliders = this.hideSliders,
+          hint = this.hint,
+          id = this.id,
+          value = this.internalValue,
+          label = this.label,
+          menuActive = this.menuActive,
+          messages = this.messages,
+          modeForColorPicker = this.modeForColorPicker,
+          persistentHint = this.persistentHint,
+          prependIcon = this.prependIcon,
+          rules = this.rules,
+          showSwatches = this.showSwatches,
+          success = this.success,
+          successMessages = this.successMessages,
+          swatches = this.swatches,
+          swatchesMaxHeight = this.swatchesMaxHeight,
+          validateOnBlur = this.validateOnBlur,
+          validationState = this.validationState,
+          valueForColorPicker = this.valueForColorPicker;
+      return h('VInput', {
+        props: {
+          appendIcon: appendIcon,
+          disabled: disabled,
+          error: error,
+          errorCount: errorCount,
+          errorMessages: errorMessages,
+          hideDetails: hideDetails,
+          hint: hint,
+          id: id,
+          messages: messages,
+          persistentHint: persistentHint,
+          prependIcon: prependIcon,
+          rules: rules,
+          success: success,
+          successMessages: successMessages,
+          validateOnBlur: validateOnBlur,
+          value: value
+        },
+        on: {
+          'click:append': function clickAppend() {
+            for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+              args[_key] = arguments[_key];
+            }
+
+            _this2.$emit.apply(_this2, ['click:append'].concat(args));
+          },
+          'click:prepend': function clickPrepend() {
+            for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+              args[_key2] = arguments[_key2];
+            }
+
+            _this2.$emit.apply(_this2, ['click:prepend'].concat(args));
+          },
+          'update:error': function updateError() {
+            for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+              args[_key3] = arguments[_key3];
+            }
+
+            _this2.$emit.apply(_this2, ['update:error'].concat(args));
+          }
+        },
+        scopedSlots: {
+          'append': $scopedSlots['append'],
+          'message': $scopedSlots['message'],
+          'prepend': $scopedSlots['prepend']
+        },
+        ref: 'input'
+      }, [h('VMenu', {
+        ref: 'menu',
+        props: {
+          closeOnContentClick: false,
+          disabled: disabled,
+          offsetY: true,
+          value: menuActive
+        },
+        on: {
+          'input': function input(value) {
+            _this2.menuActive = value;
+          }
+        },
+        scopedSlots: {
+          'activator': function activator(_ref) {
+            var attrs = _ref.attrs,
+                on = _ref.on;
+            return h('div', {
+              attrs: attrs,
+              on: on
+            }, [h('div', {
+              style: _objectSpread2(_objectSpread2({}, InteractivityNone), {}, {
+                alignItems: 'center',
+                display: 'grid',
+                gap: '8px',
+                gridTemplateColumns: 'auto 1fr'
+              })
+            }, [h('div', {
+              "class": validationState,
+              style: _objectSpread2(_objectSpread2(_objectSpread2(_objectSpread2({}, PositionRelative), RoundedFull), Transition), {}, {
+                backgroundColor: 'transparent !important',
+                borderColor: disabled ? dark ? 'hsla(0,0%,100%,.3)' : 'rgba(0,0,0,.26)' : dark ? '#fff' : 'rgba(0,0,0,.54)',
+                borderStyle: 'solid',
+                borderWidth: '2px',
+                height: '24px',
+                overflow: 'hidden',
+                width: '24px'
+              })
+            }, [h('div', {
+              style: {
+                position: 'absolute',
+                bottom: '-4px',
+                left: '-4px',
+                right: '-4px',
+                top: '-4px'
+              }
+            }, [h('div', {
+              style: _objectSpread2(_objectSpread2({}, PositionCover), dark ? BackgroundCheckered(8, '#fff', '#000') : BackgroundCheckered(8, '#f00', '#0f0'))
+            }), h('div', {
+              style: _objectSpread2(_objectSpread2({}, PositionCover), {}, {
+                backgroundColor: _this2.valueAsString
+              })
+            })])])].concat(_toConsumableArray(function () {
+              var content;
+              var slot = $scopedSlots['label'];
+
+              if (slot) {
+                content = slot();
+              } else {
+                if (label) {
+                  content = label;
+                } else {
+                  return [];
+                }
+              }
+
+              return [h('div', [h('VLabel', {
+                props: {
+                  color: validationState,
+                  disabled: disabled,
+                  focused: !!validationState
+                }
+              }, content)])];
+            }())))]);
+          },
+          'default': function _default() {
+            return h('VCard', [h('VColorPicker', {
+              props: {
+                canvasHeight: canvasHeight,
+                disabled: disabled,
+                dotSize: dotSize,
+                flat: true,
+                hideCanvas: hideCanvas,
+                hideInputs: hideInputs,
+                hideModeSwitch: hideModeSwitch,
+                hideSliders: hideSliders,
+                mode: modeForColorPicker,
+                showSwatches: showSwatches,
+                swatches: swatches,
+                swatchesMaxHeight: swatchesMaxHeight,
+                value: valueForColorPicker
+              },
+              on: {
+                'input': function input(value) {
+                  _this2.internalValue = value;
+                },
+                'update:mode': function updateMode(value) {
+                  _this2.modeForColorPicker = value;
+                }
+              }
+            })].concat(_toConsumableArray(function () {
+              var slot = $scopedSlots['actions'];
+
+              if (slot) {
+                return [h('VCardActions', slot({
+                  clear: clear
+                }))];
+              }
+
+              return [];
+            }())));
+          }
+        }
+      })]);
+    }
+  };
+
+  var _globalThis$window, _globalThis$window$Vu;
+  (_globalThis$window = globalThis.window) === null || _globalThis$window === void 0 ? void 0 : (_globalThis$window$Vu = _globalThis$window.Vue) === null || _globalThis$window$Vu === void 0 ? void 0 : _globalThis$window$Vu.component(Component.name, Component);
+
+  return Component;
+
+})));

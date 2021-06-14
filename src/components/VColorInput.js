@@ -1,8 +1,8 @@
+import BackgroundCheckered from '../styles/BackgroundCheckered';
 import InteractivityNone from '../styles/InteractivityNone';
-import PositionCenter from '../styles/PositionCenter';
+import PositionCover from '../styles/PositionCover';
 import PositionRelative from '../styles/PositionRelative';
 import RoundedFull from '../styles/RoundedFull';
-import SizeFull from '../styles/SizeFull';
 import Transition from '../styles/Transition';
 import Color from '../utils/Color';
 import isDeepEqual from '../utils/isDeepEqual';
@@ -177,6 +177,7 @@ export default {
 			$scopedSlots,
 			appendIcon,
 			canvasHeight,
+			clear,
 			dark,
 			disabled,
 			dotSize,
@@ -191,6 +192,7 @@ export default {
 			hint,
 			id,
 			internalValue: value,
+			label,
 			menuActive,
 			messages,
 			modeForColorPicker,
@@ -203,8 +205,8 @@ export default {
 			swatches,
 			swatchesMaxHeight,
 			validateOnBlur,
+			validationState,
 			valueForColorPicker,
-			clear,
 		} = this;
 		return h(
 			'VInput',
@@ -286,150 +288,64 @@ export default {
 										h(
 											'div',
 											{
+												class: validationState,
 												style: {
 													...PositionRelative,
+													...RoundedFull,
+													...Transition,
+													backgroundColor: 'transparent !important',
+													borderColor: (disabled
+														? (dark
+															? 'hsla(0,0%,100%,.3)'
+															: 'rgba(0,0,0,.26)'
+														)
+														: (dark
+															? '#fff'
+															: 'rgba(0,0,0,.54)'
+														)
+													),
+													borderStyle: 'solid',
+													borderWidth: '2px',
 													height: '24px',
+													overflow: 'hidden',
 													width: '24px',
 												},
 											},
-											[(() => {
-												let {validationState} = this;
-												return h(
-													'div',
-													{
-														class: validationState,
-														style: {
-															...PositionCenter,
-															...RoundedFull,
-															...SizeFull,
-															...Transition,
-															backgroundColor: 'transparent !important',
-															borderWidth: '2px',
-															borderStyle: 'solid',
-															borderColor: (disabled
-																? (dark
-																	? 'hsla(0,0%,100%,.3)'
-																	: 'rgba(0,0,0,.26)'
-																)
-																: (dark
-																	? '#fff'
-																	: 'rgba(0,0,0,.54)'
-																)
-															),
-														},
-													},
-												);
-
-
-												/*if (disabled) {
-													return h(
-														'div',
-														{
-															style: {
-																...PositionCenter,
-																...RoundedFull,
-																...Size(0),
-																...Transition,
-																borderWidth: '4px',
-																borderStyle: 'solid',
-																borderColor: (dark
-																	? 'hsla(0,0%,100%,.2)'
-																	: 'rgba(0,0,0,.26)'
-																),
-															},
-														},
-													);
-												}
-												if (value) {
-													return h(
-														'div',
-														{
-															style: {
-																...PositionCenter,
-																...RoundedFull,
-																...Size(0),
-																...Transition,
-																borderWidth: '4px',
-																borderStyle: 'solid',
-																borderColor: (dark
-																	? 'hsla(0,0%,100%,.2)'
-																	: 'rgba(0,0,0,.26)'
-																),
-															},
-														},
-													);
-												}
-												return h(
-													'div',
-													{
-														style: {
-															...PositionCenter,
-															...RoundedFull,
-															...SizeFull,
-															...Transition,
-															borderWidth: '4px',
-															borderStyle: 'solid',
-															borderColor: (dark
-																? 'hsla(0,0%,100%,.2)'
-																: 'rgba(0,0,0,.26)'
-															),
-														},
-													},
-												);*/
-											})()]
-											/*[h(
+											[h(
 												'div',
 												{
 													style: {
-														...(() => {
-															if (disabled) {
-																return {
-																	...Size('8px'),
-																};
-															}
-															if (value) {
-																return {
-																	...SizeFull,
-																};
-															}
-															return {};
-														})(),
-														...OverflowHidden,
-														...PositionCenter,
-														...RoundedFull,
-														...Transition,
-														...(dark
-															? BackgroundCheckered(8, '#fff', '#000')
-															: BackgroundCheckered(8, '#f00', '#0f0')
-														),
+														position: 'absolute',
+														bottom: '-4px',
+														left: '-4px',
+														right: '-4px',
+														top: '-4px',
 													},
 												},
-												[h(
-													'div',
-													{
-														style: {
-															...(() => {
-																if (disabled) {
-																	return {
-																		...(dark
-																			? BackgroundColor('hsla(0,0%,100%,.2)')
-																			: BackgroundColor('rgba(0,0,0,.26)')
-																		),
-																	};
-																}
-																if (value) {
-																	return {
-																		...BackgroundColor(this.valueAsString),
-																	};
-																}
-																return {};
-															})(),
-															...SizeFull,
-															...Transition,
+												[
+													h(
+														'div',
+														{
+															style: {
+																...PositionCover,
+																...(dark
+																	? BackgroundCheckered(8, '#fff', '#000')
+																	: BackgroundCheckered(8, '#f00', '#0f0')
+																),
+															},
 														},
-													},
-												)],
-											)],*/
+													),
+													h(
+														'div',
+														{
+															style: {
+																...PositionCover,
+																backgroundColor: this.valueAsString,
+															},
+														},
+													),
+												],
+											)],
 										),
 										...(() => {
 											let content;
@@ -437,14 +353,12 @@ export default {
 											if (slot) {
 												content = slot();
 											} else {
-												let {label} = this;
 												if (label) {
 													content = label;
 												} else {
 													return [];
 												}
 											}
-											let {validationState} = this;
 											return [h(
 												'div',
 												[h(
