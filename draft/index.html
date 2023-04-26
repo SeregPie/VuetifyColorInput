@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta
+			content="width=device-width, initial-scale=1"
+			name="viewport"
+		/>
+		<title>VuetifyColorInput</title>
+		<link
+			href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/@mdi/font@5/css/materialdesignicons.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/vuetify@2/dist/vuetify.min.css"
+			rel="stylesheet"
+		/>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="https://unpkg.com/vue@2"></script>
+		<script src="https://unpkg.com/vuetify@2/dist/vuetify.min.js"></script>
+		<script src="https://unpkg.com/chroma-js@2"></script>
+		<script src="./index.js"></script>
+	</head>
+	<body>
+		<v-app
+			v-cloak
+			id="App"
+		>
+			<v-navigation-drawer
+				v-model="drawer"
+				:right="rtl"
+				app
+			>
+				<div
+					style="
+						display: grid;
+						gap: 16px;
+						padding: 8px;
+					"
+				>
+					<div>
+						<div
+							class="text--secondary"
+						>theme</div>
+						<v-item-group
+							v-model="dark"
+							mandatory
+							style="
+								display: flex;
+								gap: 8px;
+							"
+						>
+							<v-item
+								v-for="(item, i) in [
+									{
+										value: false,
+										text: 'light',
+										icon: 'mdi-white-balance-sunny',
+									},
+									{
+										value: true,
+										text: 'dark',
+										icon: 'mdi-weather-night',
+									},
+								]"
+								:key="i"
+								:value="item.value"
+								style="flex: 1"
+								v-slot="{
+									active,
+									toggle,
+								}"
+							>
+								<v-card
+									:color="active ? 'primary' : `grey ${dark ? 'darken' : 'lighten'}-3`"
+									:dark="!dark && active"
+									flat
+									rounded
+									style="
+										display: flex;
+										gap: 8px;
+										padding: 8px;
+									"
+									@click="toggle"
+								>
+									<span
+										style="flex: 1"
+									>{{ item.text }}</span>
+									<v-icon>{{ item.icon }}</v-icon>
+								</v-card>
+							</v-item>
+						</v-item-group>
+					</div>
+					<div>
+						<div
+							class="text--secondary"
+						>direction</div>
+						<v-item-group
+							v-model="rtl"
+							mandatory
+							style="
+								display: flex;
+								gap: 8px;
+							"
+						>
+							<v-item
+								v-for="(item, i) in [
+									{
+										value: false,
+										text: 'LTR',
+										icon: 'mdi-format-textdirection-l-to-r',
+									},
+									{
+										value: true,
+										text: 'RTL',
+										icon: 'mdi-format-textdirection-r-to-l',
+									},
+								]"
+								:key="i"
+								:value="item.value"
+								style="flex: 1"
+								v-slot="{
+									active,
+									toggle,
+								}"
+							>
+								<v-card
+									:color="active ? 'primary' : `grey ${dark ? 'darken' : 'lighten'}-3`"
+									:dark="!dark && active"
+									flat
+									rounded
+									style="
+										display: flex;
+										gap: 8px;
+										padding: 8px;
+									"
+									@click="toggle"
+								>
+									<span
+										style="flex: 1"
+									>{{ item.text }}</span>
+									<v-icon>{{ item.icon }}</v-icon>
+								</v-card>
+							</v-item>
+						</v-item-group>
+					</div>
+				</div>
+				<v-divider></v-divider>
+				<div
+					style="
+						display: grid;
+						gap: 16px;
+						padding: 8px;
+					"
+				>
+					<v-checkbox
+						v-model="noAlpha"
+						class="ma-0 pa-0"
+						hide-details
+						label="no alpha"
+					></v-checkbox>
+				</div>
+				<v-divider></v-divider>
+				<div
+					style="
+						display: grid;
+						gap: 16px;
+						padding: 8px;
+					"
+				>
+					<v-checkbox
+						v-model="disabled"
+						class="ma-0 pa-0"
+						hide-details
+						label="disabled"
+					></v-checkbox>
+					<v-checkbox
+						v-model="hideDetails"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide details"
+					></v-checkbox>
+					<v-checkbox
+						v-model="persistentHint"
+						class="ma-0 pa-0"
+						hide-details
+						label="persistent hint"
+					></v-checkbox>
+				</div>
+				<v-divider></v-divider>
+				<div
+					style="
+						display: grid;
+						gap: 16px;
+						padding: 8px;
+					"
+				>
+					<v-checkbox
+						v-model="hideCanvas"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide canvas"
+					></v-checkbox>
+					<v-checkbox
+						v-model="hideSliders"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide sliders"
+					></v-checkbox>
+					<v-select
+						v-model="mode"
+						:items="modeItems"
+						filled
+						hide-details
+						label="mode"
+					></v-select>
+					<v-checkbox
+						v-model="hideInputs"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide inputs"
+					></v-checkbox>
+					<v-checkbox
+						v-model="hideModeSwitch"
+						class="ma-0 pa-0"
+						hide-details
+						label="hide mode switch"
+					></v-checkbox>
+					<v-checkbox
+						v-model="showSwatches"
+						class="ma-0 pa-0"
+						hide-details
+						label="show swatches"
+					></v-checkbox>
+				</div>
+			</v-navigation-drawer>
+			<v-app-bar
+				app
+				color="primary"
+				dark
+			>
+			<v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+				<v-toolbar-title>VuetifyColorInput</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-btn
+					href="https://github.com/SeregPie/VuetifyColorInput"
+					icon
+					target="_blank"
+				>
+					<v-icon>mdi-github</v-icon>
+				</v-btn>
+			</v-app-bar>
+			<v-main>
+				<v-container
+					fill-height
+					justify-center
+				>
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							gap: 16px;
+							max-width: 256px;
+							width: 100%;
+						"
+					>
+						<v-sheet
+							class="pa-4"
+							color="primary"
+							dark
+						>
+							<pre>{{ valueFormatted }}</pre>
+						</v-sheet>
+						<v-color-input
+							v-model="value"
+							:disabled="disabled"
+							:hide-canvas="hideCanvas"
+							:hide-details="hideDetails"
+							:hide-inputs="hideInputs"
+							:hide-mode-switch="hideModeSwitch"
+							:hide-sliders="hideSliders"
+							:mode.sync="mode"
+							:no-alpha="noAlpha"
+							:persistent-hint="persistentHint"
+							:rules="rules"
+							:show-swatches="showSwatches"
+							hint="The color should not be too light or too dark."
+							label="color"
+						></v-color-input>
+					</div>
+				</v-container>
+			</v-main>
+		</v-app>
+		<script src="./demo/script.js"></script>
+	</body>
+</html>

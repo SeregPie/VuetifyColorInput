@@ -1,5 +1,5 @@
-import Color from '../utils/Color';
-import isDeepEqual from '../utils/isDeepEqual';
+import Color from './utils/Color';
+import isDeepEqual from './utils/isDeepEqual';
 
 export default {
 	name: 'VColorInput',
